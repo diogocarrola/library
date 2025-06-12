@@ -44,4 +44,29 @@ bookForm.addEventListener('submit', (e) => {
     
     // Temporary console log (we'll display books next)
     console.log("Added book:", myLibrary);
+
+    // Display updated books
+    displayBooks();
 });
+
+// Function to display books in the library
+function displayBooks() {
+    const container = document.getElementById('books-container');
+    container.innerHTML = ''; // Clear existing
+    
+    myLibrary.forEach(book => {
+        const card = document.createElement('div');
+        card.className = 'book-card';
+        card.dataset.id = book.id; // Important for later
+        
+        card.innerHTML = `
+            <h3>${book.title}</h3>
+            <p>By: ${book.author}</p>
+            <p>Pages: ${book.pages}</p>
+            <p class="status">${book.read ? '✓ Read' : '✗ Not Read'}</p>
+            <button class="remove-btn">Remove</button>
+        `;
+        
+        container.appendChild(card);
+    });
+}
