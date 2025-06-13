@@ -56,20 +56,33 @@ bookForm.addEventListener('submit', (e) => {
 // Function to display books in the library
 function displayBooks() {
     const container = document.getElementById('books-container');
-    container.innerHTML = ''; // Clear existing
+    container.innerHTML = '';
     
     myLibrary.forEach(book => {
         const card = document.createElement('div');
         card.className = 'book-card';
-        card.dataset.id = book.id; // Important for later
+        card.dataset.id = book.id;
         
         card.innerHTML = `
             <h3>${book.title}</h3>
             <p>By: ${book.author}</p>
             <p>Pages: ${book.pages}</p>
-            <p class="status">${book.read ? '✓ Read' : '✗ Not Read'}</p>
-            <button class="remove-btn">Remove</button>
+            <div class="status">
+                <input type="checkbox" id="read-${book.id}" ${book.read ? 'checked' : ''}>
+                <label for="read-${book.id}">${book.read ? 'Read' : 'Not Read'}</label>
+            </div>
+            <div class="card-actions">
+                <button class="remove-btn">Remove</button>
+            </div>
         `;
+        
+        // Add checkbox event listener
+        const checkbox = card.querySelector(`#read-${book.id}`);
+        checkbox.addEventListener('change', () => {
+            book.read = checkbox.checked;
+            const label = checkbox.nextElementSibling;
+            label.textContent = checkbox.checked ? 'Read' : 'Not Read';
+        });
         
         container.appendChild(card);
     });
