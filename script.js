@@ -74,3 +74,16 @@ function displayBooks() {
         container.appendChild(card);
     });
 }
+
+// Event listener for removing books
+document.getElementById('books-container').addEventListener('click', (e) => {
+    if (e.target.classList.contains('remove-btn')) {
+        const bookId = e.target.closest('.book-card').dataset.id;
+        const bookIndex = myLibrary.findIndex(book => book.id === bookId);
+        
+        if (bookIndex !== -1) {
+            myLibrary.splice(bookIndex, 1);
+            displayBooks();
+        }
+    }
+});
