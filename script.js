@@ -45,6 +45,10 @@ bookForm.addEventListener('submit', (e) => {
     // Temporary console log (we'll display books next)
     console.log("Added book:", myLibrary);
 
+    // Add sample books
+    addBookToLibrary("Rich Dad, Poor Dad", "Robert Kiyosaki", 336, true);
+    addBookToLibrary("Be Useful", "Arnold Schwarzenegger", 288, false);
+
     // Display updated books
     displayBooks();
 });
