@@ -22,18 +22,31 @@ const bookDialog = document.getElementById('book-form-dialog');
 const bookForm = document.getElementById('book-form');
 const cancelBtn = document.getElementById('cancel-btn');
 
+// Initialize with sample books if empty
+if (myLibrary.length === 0) {
+    addBookToLibrary("Rich Dad, Poor Dad", "Robert Kiyosaki", 336, true);
+    addBookToLibrary("Be Useful", "Arnold Schwarzenegger", 288, false);
+    displayBooks();
+}
+
 // Event Listeners
 newBookBtn.addEventListener('click', () => bookDialog.showModal());
 cancelBtn.addEventListener('click', () => bookDialog.close());
 
 bookForm.addEventListener('submit', (e) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault();
     
     // Get form values
-    const title = document.getElementById('title').value;
-    const author = document.getElementById('author').value;
-    const pages = document.getElementById('pages').value;
+    const title = document.getElementById('title').value.trim();
+    const author = document.getElementById('author').value.trim();
+    const pages = parseInt(document.getElementById('pages').value);
     const read = document.getElementById('read').checked;
+    
+    // Basic validation
+    if (!title || !author || isNaN(pages)) {
+        alert('Please fill in all fields correctly');
+        return;
+    }
     
     // Add to library
     addBookToLibrary(title, author, pages, read);
@@ -41,15 +54,6 @@ bookForm.addEventListener('submit', (e) => {
     // Reset and close form
     bookForm.reset();
     bookDialog.close();
-    
-    // Temporary console log (we'll display books next)
-    console.log("Added book:", myLibrary);
-
-    // Add sample books
-    addBookToLibrary("Rich Dad, Poor Dad", "Robert Kiyosaki", 336, true);
-    addBookToLibrary("Be Useful", "Arnold Schwarzenegger", 288, false);
-
-    // Display updated books
     displayBooks();
 });
 
@@ -95,8 +99,10 @@ document.getElementById('books-container').addEventListener('click', (e) => {
         const bookIndex = myLibrary.findIndex(book => book.id === bookId);
         
         if (bookIndex !== -1) {
-            myLibrary.splice(bookIndex, 1);
-            displayBooks();
+            if (confirm('Are you sure you want to remove this book?')) {
+                myLibrary.splice(bookIndex, 1);
+                displayBooks();
+            }
         }
     }
 });
