@@ -130,3 +130,47 @@ button {
   background: rgba(0,0,0,0.5);
   backdrop-filter: blur(4px);
 }
+
+#book-form-dialog h2 {
+  margin-top: 0;
+  color: var(--dark);
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--dark);
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+.form-actions button {
+  padding: 0.7rem 1.3rem;
+}
+
+.form-actions button[type="submit"] {
+  background-color: var(--primary);
+  color: white;
+}
+
+.form-actions button[type="submit"]:hover {
+  background-color: var(--secondary);
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
