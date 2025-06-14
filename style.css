@@ -126,51 +126,71 @@ button {
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-#book-form-dialog::backdrop {
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(4px);
-}
-
-#book-form-dialog h2 {
-  margin-top: 0;
-  color: var(--dark);
-  text-align: center;
+#book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 .form-group {
-  margin-bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
   color: var(--dark);
   font-weight: 500;
 }
 
-.form-group input {
-  width: 100%;
+.form-group input[type="text"],
+.form-group input[type="number"] {
   padding: 0.8rem;
   border: 1px solid #ddd;
   border-radius: 8px;
-  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.3s;
 }
 
-.form-actions button {
-  padding: 0.7rem 1.3rem;
-}
-
-.form-actions button[type="submit"] {
-  background-color: var(--primary);
-  color: white;
-}
-
-.form-actions button[type="submit"]:hover {
-  background-color: var(--secondary);
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(72, 149, 239, 0.2);
 }
 
 .checkbox {
   display: flex;
   align-items: center;
   gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary);
+  margin: 0;
+}
+
+.checkbox label {
+  font-size: 0.95rem;
+  color: var(--dark);
+  cursor: pointer;
+  user-select: none;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 480px) {
+  #book-form-dialog {
+    width: 90vw;
+    padding: 1.5rem;
+  }
 }
